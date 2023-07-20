@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 const variants = {
   primary: {
     color: "#ffffff",
-    backgorundColor: "#1D3461",
+    backgroundColor: "#1D3461",
     border: "none",
   },
   success: {
@@ -19,9 +19,12 @@ const variants = {
   },
 } as const;
 
+
+
 type StyledButtonProps = {
   variant: keyof typeof variants;
 };
+
 
 export const StyledButton = styled.button<StyledButtonProps>`
   ${({ variant }) => {
@@ -45,3 +48,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
     outline: none;
   }
 `;
+
+
+
