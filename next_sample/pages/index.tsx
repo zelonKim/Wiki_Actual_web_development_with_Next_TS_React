@@ -103,7 +103,7 @@ export default Page;
 
 ///////////////////
 
-import { NextPage } from "next";
+/* import { NextPage } from "next";
 import styled from "styled-components";
 
 const Text = styled.span`
@@ -120,4 +120,71 @@ const Page: NextPage = () => {
     </div>
   );
 };
-export default Page;
+export default Page; */
+
+/////////////////////
+
+// 프레젠테이션 컴포넌트
+import ".styles.css";
+
+type ButtonProps = {
+  label: string;
+  text: string;
+  disabled: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+export const Button = (props: ButtonProps) => {
+  const { label, text, disabled, onClick } = props;
+
+  return (
+    <div className="button-container">
+      <span> {label} </span>
+      <button disabled={disabled} onClick={onClick}>
+        {text}
+      </button>
+    </div>
+  );
+};
+
+///////////////////
+
+// 컨테이너 컴포넌트
+import { useState, useCallback } from "react";
+
+const usePopup = () => {
+  const cb = useCallback((text: string) => {
+    prompt(text);
+  }, []);
+  return cb;
+};
+
+type CountButtonProps = {
+  label: string;
+  maximum: number;
+};
+
+export const CountButton = (props: CountButtonProps) => {
+  const { label, maximum } = props;
+
+  const displayPopup = usePopup();
+
+  const [count, setCount] = useState(0);
+
+  const onClick = useCallback(() => {
+    const newCount = count + 1;
+    setCount(newCount);
+    if (newCount >= maximum) {
+      displayPopup(`You've clicked ${newCount} times`);
+    }
+  }, [count, maximum]);
+
+  const disabled = count >= maximum;
+  const text = disabled
+    ? `Can't click any more`
+    : `You've clicked ${count} times`;
+
+  return (
+    <Button disabled={disabled} onClick={onClick} label={label} text={text} />
+  );
+};
