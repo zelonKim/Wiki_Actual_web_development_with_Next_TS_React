@@ -32,7 +32,7 @@ export default function App() {
 ////////////////
 
 
-import useSWR from 'swr'
+/* import useSWR from 'swr'
 
 type User = {
     name: string
@@ -44,4 +44,4 @@ const Profile = () => {
     if(error) return <div>failed to load</div>
     if (!data) return <div> loading... </div>
     return <div> Hello {data.name}! </div>
-}
+} */
